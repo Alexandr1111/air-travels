@@ -1,0 +1,106 @@
+.flight {
+  input[type='button'] {
+    width: 100%;
+    background: #ffb168;
+    color: white;
+    height: 40px;
+    outline: none;
+    border: none;
+    &:hover {
+      color: black;
+    }
+  }
+  .header {
+    background: #0087c9;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 11px;
+    height: 42px;
+    .headerName {
+      color: white;
+      font-size: 18px;
+    }
+    .headerPrice {
+      color: white;
+      & p:nth-child(1) {
+        font-size: 26px;
+        text-align: right;
+        margin-bottom: 2px;
+      }
+      & p:nth-child(2) {
+        font-size: 14px;
+      }
+    }
+  }
+  .route {
+    padding: 9px 0;
+    border-bottom: 1px solid #e2e2e2;
+  }
+  .dates {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 0 222px;
+    margin: 12px 0;
+  }
+  .transfer {
+    width: 85%;
+    margin: 0 auto;
+    border-bottom: 1px solid #a2a2a2;
+    .oneTransfer {
+
+    }
+    .noTransfers {
+
+    }
+  }
+  .carrier {
+    margin-top: 15px;
+    margin-bottom: 5px;
+  }
+  .routeContainer {
+    padding: 5px 11px;
+
+    .timeContainer {
+      display: flex;
+      align-items: center;
+      .time {
+        font-weight: 600;
+        font-size: 22px;
+        margin-right: 8px;
+        &.mod {
+          margin-right: 0;
+          margin-left: auto;
+        }
+      }
+      .day,
+      .month,
+      .weekDay {
+        color: #00a6e1;
+        font-size: 20px;
+      }
+      .day {
+        margin-right: 6px;
+        font-size: 20px;
+      }
+      .month {
+        margin-right: 3px;
+      }
+    }
+    .travelTime {
+      display: flex;
+      align-items: center;
+    }
+  }
+  & + .flight {
+    margin-top: 30px;
+  }
+}
+
+.route {
+
+}
+
+.uid {
+  color: #00a6e1;
+}

@@ -1,14 +1,22 @@
 .appWrapper {
-
+  width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  border: 1px solid black;
+  grid-gap: 0 2%;
 }
 
 .filters {
-  width: 30%;
-  background: red;
+  border: 1px solid green;
 }
 
 .main {
-  width: 70%;
-  background: blue;
+  border: 1px solid blue;
+  .showMore {
+    display: block;
+    margin: 20px auto 0;
+    padding: 2px 5px;
+  }
 }
 
