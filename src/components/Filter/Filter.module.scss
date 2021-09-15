@@ -1,12 +1,49 @@
-.sort {
+.filtersInner {
+  padding: 58px 15px 20px 15px;
+  & section {
+    display: flex;
+    flex-direction: column;
+    & label {
+      display: flex;
+      align-items: center;
+      & input {
+        margin-right: 4px;
+      }
+      & + label {
+        margin-top: 5px;
+      }
+    }
+    &.price {
+      & label {
+        & input {
+          margin-right: 0;
+          margin-left: 5px;
+          width: 75%;
+          padding: 2px 3px;
+        }
+        & + label {
+          margin-top: 18px;
+        }
+      }
+    }
+  }
   & h2 {
-    color: greenyellow;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 18px;
   }
 }
-
-.filter {
-
+.sort {
+  margin-bottom: 50px;
+  & label {
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }
 .price {
-
+  margin-bottom: 35px;
+}
+.airlines {
+  margin-bottom: 35px;
 }
