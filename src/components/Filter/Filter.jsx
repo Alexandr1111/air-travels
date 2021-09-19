@@ -3,6 +3,12 @@ import c from './Filter.module.scss';
 
 class Filter extends Component {
 
+  constructor(props) {
+    super(props);
+    this.minPriceRef = React.createRef();
+    this.maxPriceRef = React.createRef();
+  }
+
   onPriceUpClick = () => {
     this.props.switchByPriceCreator(true);
   }
@@ -13,6 +19,15 @@ class Filter extends Component {
 
   onTravelTimeClick = () => {
     this.props.switchByTravelTimeCreator(true);
+  }
+
+  onMinPriceInput = () => {
+    console.log('gggnb: ', this.minPriceRef.current.value)
+    this.props.inputMinPrice(this.minPriceRef.current.value);
+  }
+
+  onMaxPriceInput = () => {
+    this.props.inputMaxPrice(this.maxPriceRef.current.value);
   }
 
   render() {
@@ -33,10 +48,10 @@ class Filter extends Component {
         <section className={c.price}>
           <h2>Цена</h2>
           <label>
-            От <input type="number" defaultValue={0} onInput={null} />
+            От <input type="number" ref={this.minPriceRef} onChange={this.onMinPriceInput} />  {/*поиграть в defValue, провайднуть ему мин. цену выведенных полетов*/}
           </label>
           <label>
-            До <input type="number" />
+            До <input type="number" ref={this.maxPriceRef} onChange={this.onMaxPriceInput} />
           </label>
         </section>
         <section className={c.airlines}>

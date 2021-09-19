@@ -8,8 +8,6 @@ class Flight extends Component {
 
     const carrier = flight.flight.carrier.caption;
 
-    const transfer = flight.flight.legs[0].segments[0].stops; // кол-во пересадок
-
     const departureCityTo = flight.flight.legs[0].segments[0].departureCity.caption;
     const departureAirportTo = flight.flight.legs[0].segments[0].departureAirport.caption;
     const departureAirportToUID = `(${flight.flight.legs[0].segments[0].departureAirport.uid})`;
@@ -100,11 +98,7 @@ class Flight extends Component {
             </div>
           </div>
 
-          <div className={c.transfer}>
-            {transfer
-              ? <p className={c.oneTransfer} />
-              : <p className={c.noTransfers} />}
-          </div>
+          <div className={c.transfer} />
 
           <div className={c.carrier}>
             Рейс выполняет: {carrier}
@@ -139,11 +133,7 @@ class Flight extends Component {
             </div>
           </div>
 
-          <div className={c.transfer}>
-            {transfer
-              ? <p className={c.oneTransfer} />
-              : <p className={c.noTransfers} />}
-          </div>
+          <div className={c.transfer} />
 
           <div className={c.carrier}>
             Рейс выполняет: {carrier}
