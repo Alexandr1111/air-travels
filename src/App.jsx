@@ -5,7 +5,7 @@ import {compose} from "redux";
 import {connect} from "react-redux";
 import {
   inputMaxPrice,
-  inputMinPrice,
+  inputMinPrice, switchByCarrier,
   switchByPriceCreator,
   switchByTravelTimeCreator
 } from "./store/reducers/filter-reducer";
@@ -15,15 +15,15 @@ import {inputPriceWork} from "./utils/priceService";
 class App extends Component {
   render() {
 
-    const dataArr = this.props.dataArr.slice(0,5);
+    const dataArr = this.props.dataArr;
 
     const sortFlights = () => {
       if (this.props.priceUpActive) {
-        return inputPriceWork(this.props.priceMin, this.props.priceMax, dataArr, 'priceUp');
+        return inputPriceWork(this.props.priceMin, this.props.priceMax, dataArr, 'priceUp', this.props.carriers);
       }
 
       else if (!this.props.priceUpActive && !this.props.travelTimeUpActive) {
-        return inputPriceWork(this.props.priceMin, this.props.priceMax, dataArr, 'priceDown');
+        return inputPriceWork(this.props.priceMin, this.props.priceMax, dataArr, 'priceDown', this.props.carriers);
       }
 
       else if (this.props.travelTimeUpActive) {
@@ -50,7 +50,7 @@ class App extends Component {
           i.trueFlightDuration = minutesTravelDurationTo + minutesTravelDurationFrom;
           dataArrFlightDuration.push(i);
         })
-        return inputPriceWork(this.props.priceMin, this.props.priceMax, dataArrFlightDuration, 'travelTime');
+        return inputPriceWork(this.props.priceMin, this.props.priceMax, dataArrFlightDuration, 'travelTime', this.props.carriers);
       }
     }
 
@@ -64,11 +64,15 @@ class App extends Component {
             switchByTravelTimeCreator={this.props.switchByTravelTimeCreator}
             inputMinPrice={this.props.inputMinPrice}
             inputMaxPrice={this.props.inputMaxPrice}
+            dataArr={this.props.dataArr}
+            switchByCarrier={this.props.switchByCarrier}
           />
         </div>
         <div className={c.main}>
           {sortFlights()}
-          <input className={c.showMore} type="button" value="Показать ещё" />
+          <button className={c.showMore} type="button">
+            Показать ещё
+          </button>
         </div>
       </div>
     )
@@ -77,14 +81,16 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    dataArr: state.filter.data,
+    // dataArr: state.filter.data.slice(0,5),
+    dataArr: state.filter.data.slice(0,2),
     priceUpActive: state.filter.priceUpActive,
     travelTimeUpActive: state.filter.travelTimeUpActive,
     priceMin: state.filter.priceMin,
-    priceMax: state.filter.priceMax
+    priceMax: state.filter.priceMax,
+    carriers: state.filter.carriers
   }
 }
 
 export default compose(
-  connect( mapStateToProps, { switchByPriceCreator, switchByTravelTimeCreator, inputMinPrice, inputMaxPrice } )
+  connect( mapStateToProps, { switchByPriceCreator, switchByTravelTimeCreator, inputMinPrice, inputMaxPrice, switchByCarrier } )
 )(App);

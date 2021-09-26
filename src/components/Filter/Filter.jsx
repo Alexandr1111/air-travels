@@ -30,7 +30,16 @@ class Filter extends Component {
     this.props.inputMaxPrice(this.maxPriceRef.current.value);
   }
 
+  onCheckCarriers = (e) => {
+    const { name, checked } = e.target;
+    // console.log(name, checked, 'evh');
+  // добавляем в массив в стейте если там такого name нет
+    this.props.switchByCarrier(name);
+  }
+
   render() {
+    const uniqueCarriers = this.props.dataArr.reduce((acc,elem)=>acc.add(elem.flight.carrier.caption), new Set());
+
     return (
       <div className={c.filtersInner}>
         <section className={c.sort}>
@@ -56,9 +65,13 @@ class Filter extends Component {
         </section>
         <section className={c.airlines}>
           <h2>Авиакомпании</h2>
-          <label>
-            <input type="checkbox" name="" value={"dinamicValue?"} />
-          </label>
+          {[...uniqueCarriers].sort().map(carrierName => {
+            return (
+              <label onChange={this.onCheckCarriers}>
+                <input type="checkbox" name={carrierName} value={carrierName}/> {carrierName}
+              </label>
+            )
+          })}
         </section>
       </div>
     );
