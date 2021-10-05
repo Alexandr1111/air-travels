@@ -8,15 +8,24 @@
 }
 
 .filters {
-  border: 1px solid green;
+  border-right: 1px solid green;
 }
 
 .main {
-  border: 1px solid blue;
   .showMore {
     display: block;
     margin: 20px auto 0;
-    padding: 2px 5px;
+    padding: 4px 50px;
+    color: black;
+    &:hover {
+      box-shadow: 0 0 5px 2px #34495e;
+      color: white;
+      cursor: pointer;
+      background-color: #3498db;
+    }
+    &:active {
+      border: 1px solid blue;
+    }
   }
 }
 

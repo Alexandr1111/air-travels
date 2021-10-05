@@ -7,23 +7,27 @@ import {
   inputMaxPrice,
   inputMinPrice, switchByCarrier,
   switchByPriceCreator,
-  switchByTravelTimeCreator
+  switchByTravelTimeCreator, toggleShowAll
 } from "./store/reducers/filter-reducer";
 import {calculateTime} from "./utils/dateDifference";
-import {inputPriceWork} from "./utils/priceService";
+import {filterWork} from "./utils/FilterService";
 
 class App extends Component {
-  render() {
 
+  onClickShowMore = () => {
+    this.props.toggleShowAll(true);
+  }
+
+  render() {
     const dataArr = this.props.dataArr;
 
     const sortFlights = () => {
       if (this.props.priceUpActive) {
-        return inputPriceWork(this.props.priceMin, this.props.priceMax, dataArr, 'priceUp', this.props.carriers);
+        return filterWork(this.props.priceMin, this.props.priceMax, dataArr, 'priceUp', this.props.carriers, this.props.isShowAll);
       }
 
       else if (!this.props.priceUpActive && !this.props.travelTimeUpActive) {
-        return inputPriceWork(this.props.priceMin, this.props.priceMax, dataArr, 'priceDown', this.props.carriers);
+        return filterWork(this.props.priceMin, this.props.priceMax, dataArr, 'priceDown', this.props.carriers, this.props.isShowAll);
       }
 
       else if (this.props.travelTimeUpActive) {
@@ -50,7 +54,7 @@ class App extends Component {
           i.trueFlightDuration = minutesTravelDurationTo + minutesTravelDurationFrom;
           dataArrFlightDuration.push(i);
         })
-        return inputPriceWork(this.props.priceMin, this.props.priceMax, dataArrFlightDuration, 'travelTime', this.props.carriers);
+        return filterWork(this.props.priceMin, this.props.priceMax, dataArrFlightDuration, 'travelTime', this.props.carriers, this.props.isShowAll);
       }
     }
 
@@ -70,9 +74,11 @@ class App extends Component {
         </div>
         <div className={c.main}>
           {sortFlights()}
-          <button className={c.showMore} type="button">
-            Показать ещё
-          </button>
+          {!this.props.isShowAll &&
+            <button className={c.showMore} onClick={this.onClickShowMore} type="button">
+              Показать ещё
+            </button>
+          }
         </div>
       </div>
     )
@@ -81,16 +87,16 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    // dataArr: state.filter.data.slice(0,5),
-    dataArr: state.filter.data.slice(0,2),
+    dataArr: state.filter.data.slice(0,5),
     priceUpActive: state.filter.priceUpActive,
     travelTimeUpActive: state.filter.travelTimeUpActive,
     priceMin: state.filter.priceMin,
     priceMax: state.filter.priceMax,
-    carriers: state.filter.carriers
+    carriers: state.filter.carriers,
+    isShowAll: state.filter.isShowAll
   }
 }
 
 export default compose(
-  connect( mapStateToProps, { switchByPriceCreator, switchByTravelTimeCreator, inputMinPrice, inputMaxPrice, switchByCarrier } )
+  connect( mapStateToProps, { switchByPriceCreator, switchByTravelTimeCreator, inputMinPrice, inputMaxPrice, switchByCarrier, toggleShowAll } )
 )(App);

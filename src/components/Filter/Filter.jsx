@@ -22,7 +22,6 @@ class Filter extends Component {
   }
 
   onMinPriceInput = () => {
-    console.log('gggnb: ', this.minPriceRef.current.value)
     this.props.inputMinPrice(this.minPriceRef.current.value);
   }
 
@@ -32,8 +31,6 @@ class Filter extends Component {
 
   onCheckCarriers = (e) => {
     const { name, checked } = e.target;
-    // console.log(name, checked, 'evh');
-  // добавляем в массив в стейте если там такого name нет
     this.props.switchByCarrier(name);
   }
 
