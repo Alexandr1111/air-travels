@@ -65,7 +65,7 @@ export const inputMaxPrice = price => ({ type: INPUT_MAX_PRICE, price });
 
 export const switchByCarrier = carrier => ({ type: SWITCH_BY_CARRIER, carrier });
 
-export const toggleShowAll = isShowAll => ({ type: SHOW_ALL, isShowAll });
+export const toggleShowAll = () => ({ type: SHOW_ALL });
 
 
 export default filterReducer;

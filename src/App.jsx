@@ -11,11 +11,20 @@ import {
 } from "./store/reducers/filter-reducer";
 import {calculateTime} from "./utils/dateDifference";
 import {filterWork} from "./utils/FilterService";
+import {
+  getDataArr,
+  getCarriers,
+  getIsShowAll,
+  getPriceMax,
+  getPriceMin,
+  getPriceUpActive,
+  getTravelTimeUpActive
+} from "./store/selectors/filter-selectors";
 
 class App extends Component {
 
   onClickShowMore = () => {
-    this.props.toggleShowAll(true);
+    this.props.toggleShowAll();
   }
 
   render() {
@@ -87,13 +96,13 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    dataArr: state.filter.data.slice(0,5),
-    priceUpActive: state.filter.priceUpActive,
-    travelTimeUpActive: state.filter.travelTimeUpActive,
-    priceMin: state.filter.priceMin,
-    priceMax: state.filter.priceMax,
-    carriers: state.filter.carriers,
-    isShowAll: state.filter.isShowAll
+    dataArr: getDataArr(state),
+    priceUpActive: getPriceUpActive(state),
+    travelTimeUpActive: getTravelTimeUpActive(state),
+    priceMin: getPriceMin(state),
+    priceMax: getPriceMax(state),
+    carriers: getCarriers(state),
+    isShowAll: getIsShowAll(state)
   }
 }
 
